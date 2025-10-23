@@ -40,4 +40,43 @@ test.describe('Parabank Account Login', () => {
 
     })
 
+    test('transfer funds',async({ adminPage }) =>{
+        await adminPage.getByRole('link', { name: 'Transfer Funds' }).click();
+
+        await adminPage.locator('#amount').fill('100');
+
+        await adminPage.locator('#fromAccountId').selectOption('13344');
+
+        await adminPage.locator('#toAccountId').selectOption('13344');
+
+        await adminPage.getByRole('button', { name : 'Transfer'}).click();
+
+        const amountValue = await adminPage.locator('#amount').inputValue();
+
+        const fromAccNum = await adminPage.locator('#fromAccountId').inputValue();
+
+        const toAccNum = await adminPage.locator('#toAccountId').inputValue();
+
+        const expectAmount = await adminPage.locator('#amountResult');
+
+        const expectFromAcc = await adminPage.locator('#fromAccountIdResult');
+
+        const expectToAcc = await adminPage.locator('#toAccountIdResult');
+
+
+
+        await expect(expectAmount).toContainText('$'+amountValue);
+        
+        await expect(expectFromAcc).toContainText(fromAccNum);
+
+        //console.log('This is ' + expectFromAcc + 'It is ' + fromAccNum)
+        
+        await expect(expectToAcc).toContainText(toAccNum);
+
+        //console.log('This is ' +expectToAcc + 'It is ' +toAccNum)
+        
+
+
+    })
+
 });
