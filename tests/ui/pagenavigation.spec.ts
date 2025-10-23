@@ -4,10 +4,11 @@ import { chromium,webkit,firefox } from 'playwright';
 
 test.describe( 'Parabank Navigation Page', () => {
 
-    test('Navigate the login page and verify title', async ({  }) => {
+    test('Navigate the login page and verify title', async ({ page  }) => {
 
-        const browser:Browser = await chromium.launch({headless : false});
-        const page:Page = await browser.newPage();
+        // Was learning the basic setup
+        // const browser:Browser = await chromium.launch({headless : false});
+        // const page:Page = await browser.newPage();
 
         await page.goto ('https://parabank.parasoft.com/parabank');
 
